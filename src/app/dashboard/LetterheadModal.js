@@ -1,25 +1,45 @@
-import React from 'react';
+import React, { useRef } from 'react';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 
 const LetterheadModal = ({ isOpen, onClose, pegawaiData }) => {
+  const contentRef = useRef(null);
+
+  const handleDownloadPDF = async () => {
+    if (!contentRef.current) return;
+
+    const content = contentRef.current;
+    const canvas = await html2canvas(content, {
+      scale: 2,
+      useCORS: true,
+      logging: false
+    });
+
+    const imgData = canvas.toDataURL('image/png');
+    const pdf = new jsPDF('p', 'mm', 'a4');
+    const pdfWidth = pdf.internal.pageSize.getWidth();
+    const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+
+    pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+    pdf.save(`Data_Pegawai_${pegawaiData?.nip || 'document'}.pdf`);
+  };
+
+
+
   if (!isOpen) return null;
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
       <div className="bg-white rounded-lg w-full max-w-4xl relative">
-        <button
-          onClick={onClose}
-          className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center text-gray-500 hover:text-gray-700 text-xl font-bold"
-        >
-          ×
-        </button>
 
-        <div className="p-8">
+        <div className="p-8" ref={contentRef}>
           <div className="text-center mb-6 border-b-2 border-gray-800 pb-6">
             <div className="flex justify-center items-center gap-4">
               <img
                 src="https://upload.wikimedia.org/wikipedia/commons/d/dc/Seal_of_Tasikmalaya_Regency.svg"
                 alt="Logo"
                 className="w-20 h-20"
+                crossOrigin="anonymous"
               />
               <div>
                 <h1 className="text-xl font-bold">PEMERINTAH KABUPATEN TASIKMALAYA</h1>
@@ -62,7 +82,22 @@ const LetterheadModal = ({ isOpen, onClose, pegawaiData }) => {
             </div>
           </div>
         </div>
+        <div className="absolute top-4 right-4 flex gap-2">
+          <button
+            onClick={handleDownloadPDF}
+            className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 text-sm"
+          >
+            Download
+          </button>
+          <button
+            onClick={onClose}
+            className="w-8 h-8 flex items-center justify-center text-gray-500 hover:text-gray-700 text-xl font-bold"
+          >
+            ×
+          </button>
+        </div>
       </div>
+
     </div>
   );
 };
