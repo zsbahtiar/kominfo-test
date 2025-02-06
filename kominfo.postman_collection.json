@@ -1,0 +1,103 @@
+{
+	"info": {
+		"_postman_id": "f376c308-73f2-4ad4-85d9-67814d8eb913",
+		"name": "kominfo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "11608694"
+	},
+	"item": [
+		{
+			"name": "GetPegawaiDetail",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-api-pegawai",
+						"value": "TestSeleksiPegawai2025",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://seleksi-tenagait.tasikmalayakab.go.id/api/pegawai/:nip",
+					"protocol": "https",
+					"host": [
+						"seleksi-tenagait",
+						"tasikmalayakab",
+						"go",
+						"id"
+					],
+					"path": [
+						"api",
+						"pegawai",
+						":nip"
+					],
+					"variable": [
+						{
+							"key": "nip",
+							"value": "0187353446325242"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetPegawaiList",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-api-pegawai",
+						"value": "TestSeleksiPegawai2025",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://seleksi-tenagait.tasikmalayakab.go.id/api/pegawai",
+					"protocol": "https",
+					"host": [
+						"seleksi-tenagait",
+						"tasikmalayakab",
+						"go",
+						"id"
+					],
+					"path": [
+						"api",
+						"pegawai"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetStats",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-api-pegawai",
+						"value": "TestSeleksiPegawai2025",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://seleksi-tenagait.tasikmalayakab.go.id/api/pegawai/jumlah/jeniskelamin",
+					"protocol": "https",
+					"host": [
+						"seleksi-tenagait",
+						"tasikmalayakab",
+						"go",
+						"id"
+					],
+					"path": [
+						"api",
+						"pegawai",
+						"jumlah",
+						"jeniskelamin"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
