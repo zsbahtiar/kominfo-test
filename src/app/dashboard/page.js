@@ -79,27 +79,15 @@ export default function DashboardPage() {
             </div>
         )
     }
-
-    if (error) {
-        return (
-            <div className="flex items-center justify-center min-h-screen">
-                <div className="bg-red-50 p-4 rounded-md">
-                    <p className="text-red-600">Error: {error}</p>
-                    <button
-                        onClick={() => window.location.reload()}
-                        className="mt-2 text-red-600 underline"
-                    >
-                        Retry
-                    </button>
-                </div>
-            </div>
-        )
-    }
-
     return (
 
         <div className="p-6">
             <div className="max-w-7xl mx-auto">
+            {error && (
+                    <div className="bg-red-50 p-4 rounded-md mb-6">
+                        <p className="text-red-600">Error: {error}</p>
+                    </div>
+                )}
                 <div className="flex justify-between items-center mb-6">
                     <h1 className="text-2xl font-bold">Data Pegawai</h1>
 
